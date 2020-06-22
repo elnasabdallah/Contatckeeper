@@ -13,7 +13,7 @@ const Contact = require('../models/Contact');
 router.get('/', auth, async (req, res) => {
   try {
     const contact = await Contact.find({ user: req.user.id }).sort({
-      date: -1
+      date: -1,
     });
     res.json(contact);
   } catch (err) {
@@ -27,14 +27,7 @@ router.get('/', auth, async (req, res) => {
 //@access private
 router.post(
   '/',
-  [
-    auth,
-    [
-      check('name', 'Name is required')
-        .not()
-        .isEmpty()
-    ]
-  ],
+  [auth, [check('name', 'Name is required').not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -48,7 +41,7 @@ router.post(
         email,
         type,
         phone,
-        user: req.user.id
+        user: req.user.id,
       });
       const contact = await newContact.save();
       res.json(contact);
@@ -83,7 +76,7 @@ router.put('/:id', auth, async (req, res) => {
     contact = await Contact.findByIdAndUpdate(
       req.params.id,
       {
-        $set: contactFields
+        $set: contactFields,
       },
       { new: true }
     );
