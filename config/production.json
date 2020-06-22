@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://elnas:68218087@cluster0-3iogm.mongodb.net/test?retryWrites=true&w=majority",
+
+  "jwtSecrete": "secrete"
+}
